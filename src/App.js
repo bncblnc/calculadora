@@ -1,11 +1,16 @@
-import "./App.css";
+import { Container, Content } from "./styles";
+import Input from "./components/Input";
+import Button from "./components/Button";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <header></header>
-    </div>
+    <Container>
+      <Content>
+        <Input />
+        <Button />
+      </Content>
+    </Container>
   );
-}
+};
 
 export default App;
