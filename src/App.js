@@ -31,6 +31,7 @@ const App = () => {
 
   function handleOnClear() {
     setCurrentNumber("0");
+    newOperation = false;
     reset();
   }
 
