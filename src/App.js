@@ -3,6 +3,8 @@ import Input from "./components/Input";
 import Button from "./components/Button";
 import { useState } from "react";
 
+let newOperation = false;
+
 const App = () => {
   const [currentNumber, setCurrentNumber] = useState("0");
   const [firstNumber, setFirstNumber] = useState("");
@@ -10,8 +12,13 @@ const App = () => {
   const [operation, setOperation] = useState("");
 
   function handleAddNumber(number) {
-    setCurrentNumber((prev) => `${prev === "0" ? "" : prev}${number}`);
-    if (firstNumber !== "") setSecondNumber((prev) => `${prev}${number}`);
+    if (newOperation) {
+      setCurrentNumber(number);
+      newOperation = false;
+    } else {
+      setCurrentNumber((prev) => `${prev === "0" ? "" : prev}${number}`);
+      if (firstNumber !== "") setSecondNumber((prev) => `${prev}${number}`);
+    }
   }
 
   function handleOperation(clicked) {
@@ -19,6 +26,7 @@ const App = () => {
     setOperation(clicked);
     setFirstNumber(currentNumber);
     setCurrentNumber((prev) => `${prev} ${clicked} `);
+    newOperation = false;
   }
 
   function handleOnClear() {
@@ -33,6 +41,7 @@ const App = () => {
   }
 
   function handleEquals() {
+    newOperation = true;
     switch (operation) {
       case "+":
         setCurrentNumber(Number(firstNumber) + Number(secondNumber));
